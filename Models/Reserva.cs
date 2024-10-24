@@ -16,15 +16,16 @@ namespace DesafioProjetoHospedagem.Models
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
             // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
-            if (true)
+            // *IMPLEMENTADO
+            if (Suite.Capacidade >= hospedes.Count)
             {
                 Hospedes = hospedes;
             }
             else
             {
                 // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
-                // *IMPLEMENTE AQUI*
+                // *IMPLEMENTADO
+                throw new Exception("Capacidade da Suite Menor do que a quantidade de Hospedes");
             }
         }
 
@@ -36,24 +37,33 @@ namespace DesafioProjetoHospedagem.Models
         public int ObterQuantidadeHospedes()
         {
             // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
-            // *IMPLEMENTE AQUI*
-            return 0;
+            // *IMPLEMENTADO    
+            int quantidade = Hospedes.Count;
+            return quantidade;
         }
 
         public decimal CalcularValorDiaria()
         {
             // TODO: Retorna o valor da diária
             // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
+            // *IMPLEMENTADO    
             decimal valor = 0;
 
+            try
+            {
+                valor = Suite.ValorDiaria * Convert.ToDecimal(DiasReservados);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Não foi possivel realizar a reserva {ex}");
+            }
             // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
             // *IMPLEMENTE AQUI*
-            if (true)
+            if (DiasReservados >= 10)            
             {
-                valor = 0;
+                decimal desconto = valor * 0.1M;
+                valor = valor - desconto;
             }
-
             return valor;
         }
     }
